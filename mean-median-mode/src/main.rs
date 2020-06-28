@@ -38,7 +38,7 @@ fn mean(numbers: &Vec<i32>) -> f32 {
 
 fn median(numbers: &Vec<i32>) -> f32 {
     let len = numbers.len();
-    let half_len = (len as u32 / 2) as usize;
+    let half_len = (len / 2) as usize;
 
     if len % 2 == 1 {
         return numbers[half_len] as f32;
