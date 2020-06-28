@@ -28,9 +28,20 @@ fn main() {
     }
     
     println!("The mean is: {}", mean(&numbers));
+    println!("The median is: {}", median(&numbers));
 }
 
 
 fn mean(numbers: &Vec<i32>) -> f32 {
     numbers.iter().sum::<i32>() as f32 / numbers.len() as f32
+}
+
+fn median(numbers: &Vec<i32>) -> f32 {
+    let len = numbers.len();
+    let half_len = (len as u32 / 2) as usize;
+
+    if len % 2 == 1 {
+        return numbers[half_len] as f32;
+    }
+    (numbers[half_len - 1] + numbers[half_len]) as f32 / 2.0
 }
