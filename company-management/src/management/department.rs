@@ -12,8 +12,8 @@ impl Department {
         self.employees.push(employee);
     }
 
-    pub fn remove_employee(&mut self, employee_id: u32) {
-        let index = self.employees.iter().position(|x| x.id == employee_id).unwrap();
+    pub fn remove_employee(&mut self, employee_name: &String) {
+        let index = self.employees.iter().position(|x| *x.full_name == *employee_name).unwrap();
         self.employees.remove(index);
     }
 }

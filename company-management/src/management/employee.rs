@@ -1,16 +1,11 @@
-use crate::management::department::Department;
-
-
 pub struct Employee {
-    pub id: u32,
     pub full_name: String,
-    pub department: Department
+    pub department_name: String
 }
 
 
 impl Employee {
-    pub fn change_department(&mut self, department: Department) {
-        self.department.remove_employee(self.id);
-        self.department = department;
+    pub fn change_department(&mut self, department_name: String) {
+        self.department_name = department_name;
     }
 }
