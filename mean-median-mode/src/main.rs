@@ -58,14 +58,12 @@ fn mode(numbers: &Vec<i32>) -> i32 {
         *amt += 1;
     }
 
-    let mut max_value = 0;
-    let mut key = 0;
+    let mut kv_pair = (0, 0);
 
     for (num, amt) in num_map {
-        if amt > max_value {
-            key = num;
-            max_value = amt;
+        if amt > kv_pair.1 {
+            kv_pair = (num, amt);
         }
     }
-    key
+    kv_pair.0
 }
