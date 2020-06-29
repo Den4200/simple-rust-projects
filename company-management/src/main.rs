@@ -31,6 +31,7 @@ fn main() {
 
         match resp {
             1 => add_employee(&mut departments),
+            3 => create_department(&mut departments),
             6 => {
                 println!("Exiting program..");
                 exit(0);
@@ -66,6 +67,19 @@ fn add_employee(departments: &mut HashMap<String, Department>) {
 }
 
 
+fn create_department(departments: &mut HashMap<String, Department>) {
+    let name = input("What will the department's name be?");
+    let department = Department {
+        name: name.clone(),
+        employees: Vec::new()
+    };
+
+    departments.insert(name.clone(), department);
+
+    println!("The {} department has been created.", name)
+}
+
+
 fn input(prompt: &str) -> String {
     println!("{}", prompt);
 
@@ -75,5 +89,5 @@ fn input(prompt: &str) -> String {
         .read_line(&mut response)
         .expect("Failed to read line.");
 
-    response
+    response.trim().to_string()
 }
