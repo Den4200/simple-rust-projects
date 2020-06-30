@@ -34,6 +34,7 @@ fn main() {
             2 => remove_employee(&mut departments),
             3 => create_department(&mut departments),
             4 => remove_department(&mut departments),
+            5 => transfer_employee(&mut departments),
             6 => {
                 let name = input("What is the department's name?");
 
@@ -147,6 +148,40 @@ fn remove_department(departments: &mut HashMap<String, Department>) {
         println!("The {} department has been removed.", department_name);
     } else {
         println!("Department deletion aborted.");
+    }
+}
+
+
+fn transfer_employee(departments: &mut HashMap<String, Department>) {
+    let employee_name = input("What is the employee's name?");
+    let current_department_name = input("What is their current department's name?");
+    let new_department_name = input("What department do you want to transfer this employee to?");
+
+    match departments.get_mut(&current_department_name) {
+        None => println!("Department does not exist!"),
+        Some(department) => {
+            for employee in department.employees.iter() {
+                if *employee.full_name == employee_name {
+                    department.remove_employee(&employee_name);
+
+                    match departments.get_mut(&new_department_name) {
+                        None => { println!("Department does not exist!"); return; }
+                        Some(department) => {
+                            department.add_employee(
+                                Employee {
+                                    full_name: employee_name.clone(),
+                                    department_name: new_department_name.clone()
+                                }
+                            );
+                            println!("{} was successfully transferred to the {} department.", employee_name, new_department_name);
+                        }
+                    }
+
+                    return;
+                }
+            }
+            println!("{} is not in the {} department!", employee_name, current_department_name);
+        }
     }
 }
 
