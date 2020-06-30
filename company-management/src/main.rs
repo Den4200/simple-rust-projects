@@ -60,9 +60,21 @@ fn add_employee(departments: &mut HashMap<String, Department>) {
     let full_name = input("What is their full name?");
 
     println!();
-    for d_name in departments.keys() {
+    for (d_name, dep) in departments.iter() {
         println!("{}", d_name);
+
+        for emp in dep.employees.iter() {
+            if emp.full_name == full_name {
+                println!(
+                    "{} is already in department {}! Please use option 3 instead, to transfer the employee.",
+                    full_name,
+                    emp.department_name
+                );
+                return;
+            }
+        }
     }
+    println!();
 
     let dep = input("What department will they be added to?");
 
@@ -83,6 +95,14 @@ fn add_employee(departments: &mut HashMap<String, Department>) {
 
 fn create_department(departments: &mut HashMap<String, Department>) {
     let name = input("What will the department's name be?");
+
+    for dep_name in departments.keys() {
+        if *dep_name == name {
+            println!("The {} department already exists!", name);
+            return;
+        }
+    }
+
     let department = Department {
         name: name.clone(),
         employees: Vec::new()
