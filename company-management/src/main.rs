@@ -18,10 +18,10 @@ fn main() {
             2. Remove Employee
             3. Create Department
             4. Delete Department
-            3. Transfer employee to another department
-            4. List people in a department
-            5. List all people in all departments
-            6. Exit
+            5. Transfer employee to another department
+            6. List people in a department
+            7. List all people in all departments
+            8. Exit
         "));
 
         let resp: u8 = menu
@@ -32,7 +32,7 @@ fn main() {
         match resp {
             1 => add_employee(&mut departments),
             3 => create_department(&mut departments),
-            4 => {
+            6 => {
                 let name = input("What is the department's name?");
 
                 match departments.get(&name) {
@@ -40,13 +40,13 @@ fn main() {
                     Some(department) => department.list_employees()
                 }
             },
-            5 => {
+            7 => {
                 for department in departments.values() {
                     department.list_employees();
                     println!();
                 }
             },
-            6 => {
+            8 => {
                 println!("Exiting program..");
                 exit(0);
             },
