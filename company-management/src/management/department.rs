@@ -16,4 +16,12 @@ impl Department {
         let index = self.employees.iter().position(|x| *x.full_name == *employee_name).unwrap();
         self.employees.remove(index);
     }
+
+    pub fn list_employees(&self) {
+        println!("{} Department:", self.name);
+
+        for employee in self.employees.iter() {
+            println!("    {}", employee.full_name);
+        }
+    }
 }

@@ -32,6 +32,20 @@ fn main() {
         match resp {
             1 => add_employee(&mut departments),
             3 => create_department(&mut departments),
+            4 => {
+                let name = input("What is the department's name?");
+
+                match departments.get(&name) {
+                    None => println!("Department does not exist!"),
+                    Some(department) => department.list_employees()
+                }
+            },
+            5 => {
+                for department in departments.values() {
+                    department.list_employees();
+                    println!();
+                }
+            },
             6 => {
                 println!("Exiting program..");
                 exit(0);
