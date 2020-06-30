@@ -10,6 +10,7 @@ pub struct Department {
 impl Department {
     pub fn add_employee(&mut self, employee: Employee) {
         self.employees.push(employee);
+        self.employees.sort();
     }
 
     pub fn remove_employee(&mut self, employee_name: &String) {
