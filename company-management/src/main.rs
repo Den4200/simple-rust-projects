@@ -17,7 +17,7 @@ fn main() {
             1. Add Employee
             2. Remove Employee
             3. Create Department
-            4. Delete Department
+            4. Remove Department
             5. Transfer employee to another department
             6. List people in a department
             7. List all people in all departments
@@ -33,6 +33,7 @@ fn main() {
             1 => add_employee(&mut departments),
             2 => remove_employee(&mut departments),
             3 => create_department(&mut departments),
+            4 => remove_department(&mut departments),
             6 => {
                 let name = input("What is the department's name?");
 
@@ -128,6 +129,25 @@ fn create_department(departments: &mut HashMap<String, Department>) {
     departments.insert(name.clone(), department);
 
     println!("The {} department has been created.", name)
+}
+
+
+fn remove_department(departments: &mut HashMap<String, Department>) {
+    let department_name = input("What is the department's name?");
+    let is_sure = input(
+        indoc!("
+            This will permanently remove all employees in this department.
+            Transfer them first to another department if you do not want them to be deleted.
+            Are you still sure you want to delete this department? (y/N)
+        ")
+    ).to_lowercase();
+
+    if is_sure == "y" {
+        departments.remove(&department_name);
+        println!("The {} department has been removed.", department_name);
+    } else {
+        println!("Department deletion aborted.");
+    }
 }
 
 
