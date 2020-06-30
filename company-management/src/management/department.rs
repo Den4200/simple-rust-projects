@@ -13,8 +13,10 @@ impl Department {
     }
 
     pub fn remove_employee(&mut self, employee_name: &String) {
-        let index = self.employees.iter().position(|x| *x.full_name == *employee_name).unwrap();
-        self.employees.remove(index);
+        match self.employees.iter().position(|x| *x.full_name == *employee_name) {
+            None => println!("Employee is not in this department!"),
+            Some(index) => { self.employees.remove(index); }
+        }
     }
 
     pub fn list_employees(&self) {

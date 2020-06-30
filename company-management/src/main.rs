@@ -31,6 +31,7 @@ fn main() {
 
         match resp {
             1 => add_employee(&mut departments),
+            2 => remove_employee(&mut departments),
             3 => create_department(&mut departments),
             6 => {
                 let name = input("What is the department's name?");
@@ -90,6 +91,22 @@ fn add_employee(departments: &mut HashMap<String, Department>) {
             println!("{} was added to the {} department.", full_name, department.name);
         }
     };
+}
+
+
+fn remove_employee(departments: &mut HashMap<String, Department>) {
+    let employee_name = input("What is the employee's name?");
+    let department_name = input("What department is employee from?");
+
+    for department in departments.values_mut() {
+        if *department.name == department_name {
+            department.remove_employee(&employee_name);
+            println!("Removed {} successfully", employee_name);
+            return;
+        }
+    }
+
+    println!("Department does not exist!");
 }
 
 
