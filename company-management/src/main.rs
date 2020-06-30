@@ -59,9 +59,9 @@ fn main() {
 fn add_employee(departments: &mut HashMap<String, Department>) {
     let full_name = input("What is their full name?");
 
-    println!();
+    println!("\nDepartments:");
     for (d_name, dep) in departments.iter() {
-        println!("{}", d_name);
+        println!(" - {}", d_name);
 
         for emp in dep.employees.iter() {
             if emp.full_name == full_name {

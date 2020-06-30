@@ -21,7 +21,7 @@ impl Department {
         println!("{} Department:", self.name);
 
         for employee in self.employees.iter() {
-            println!("    {}", employee.full_name);
+            println!(" - {}", employee.full_name);
         }
     }
 }
