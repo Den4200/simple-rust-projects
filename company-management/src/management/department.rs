@@ -1,6 +1,7 @@
 use crate::management::employee::Employee;
 
 
+#[derive(Debug)]
 pub struct Department {
     pub name: String,
     pub employees: Vec<Employee>
@@ -8,6 +9,7 @@ pub struct Department {
 
 
 impl Department {
+
     pub fn add_employee(&mut self, employee: Employee) {
         self.employees.push(employee);
         self.employees.sort();
