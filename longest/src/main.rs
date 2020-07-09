@@ -1,3 +1,4 @@
+use std::fmt::Display;
 use std::io;
 
 
@@ -11,6 +12,10 @@ fn main() {
     let longest_string = longest(str1.as_str(), str2.as_str());
 
     println!("\nThe longest string is: \"{}\".", longest_string);
+
+    let announcement = input("\nEnter an announcement.");
+
+    println!("\nThe longest string is: \"{}\".", longest_with_an_announcement(&str1, &str2, &announcement));
 }
 
 
@@ -19,6 +24,23 @@ fn longest<'a>(string1: &'a str, string2: &'a str) -> &'a str {
         string1
     } else {
         string2
+    }
+}
+
+
+fn longest_with_an_announcement<'a, T>(
+    x: &'a str,
+    y: &'a str,
+    ann: T,
+) -> &'a str
+where
+    T: Display,
+{
+    println!("Announcement! {}", ann);
+    if x.len() > y.len() {
+        x
+    } else {
+        y
     }
 }
 
