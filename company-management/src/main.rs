@@ -53,7 +53,7 @@ fn main() {
                 println!("Exiting program..");
                 exit(0);
             },
-            _ => println!("You did not enter a number between 1 and 6.\n")
+            _ => println!("You did not enter a number between 1 and 8.\n")
         };
     };
 }
