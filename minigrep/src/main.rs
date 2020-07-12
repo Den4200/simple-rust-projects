@@ -1,7 +1,5 @@
-use std::env;
+use std::{env, fs, process};
 use std::error::Error;
-use std::fs;
-use std::process;
 
 
 fn main() {
