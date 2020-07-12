@@ -1,4 +1,5 @@
 use std::env;
+use std::fs;
 use std::process;
 
 
@@ -11,6 +12,16 @@ fn main() {
     });
 
     println!("Searching for {} in {}", config.query, config.filename);
+
+    run(config);
+}
+
+
+fn run(config: Config) {
+    let contents = fs::read_to_string(config.filename)
+        .expect("Could not read file");
+
+    println!("\n{}", contents);
 }
 
 
@@ -18,6 +29,7 @@ struct Config {
     query: String,
     filename: String
 }
+
 
 impl Config {
     fn new(args: &[String]) -> Result<Config, &'static str> {
