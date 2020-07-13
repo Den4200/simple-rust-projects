@@ -1,8 +1,6 @@
 use std::error::Error;
 use std::fs;
 
-use indoc::indoc;
-
 
 pub struct Config {
     pub query: String,
@@ -48,6 +46,8 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 
 #[cfg(test)]
 mod tests {
+    use indoc::indoc;
+
     use super::*;
 
     #[test]
