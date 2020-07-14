@@ -18,8 +18,11 @@ impl Config {
         let query = args[1].clone();
         let filename = args[2].clone();
 
-        let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
-    
+        let case_sensitive = match env::var("CASE_INSENSITIVE") {
+            Ok(value) => if value == "1" { false } else { true },
+            Err(_) => false
+        };
+
         Ok(Config { query, filename, case_sensitive })
     }    
 }
