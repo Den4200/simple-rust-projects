@@ -4,7 +4,7 @@ use cacher::Cacher;
 
 
 fn main() {
-    let square = Cacher::new(|num| num.pow(2));
+    let mut square = Cacher::new(|num| num.pow(2));
 
     let mut inputs = Vec::new();
 
@@ -24,6 +24,9 @@ fn main() {
         inputs.push(answer);
     }
 
+    for inp in inputs {
+        println!("The square of {} is {}", inp, square.value(inp));
+    }
 }
 
 
