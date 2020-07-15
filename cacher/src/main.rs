@@ -4,7 +4,7 @@ use cacher::Cacher;
 
 
 fn main() {
-    let mut square = Cacher::new(|num| num.pow(2));
+    let mut square = Cacher::new(|num: u128| num.pow(2));
 
     let mut inputs = Vec::new();
 
