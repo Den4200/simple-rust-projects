@@ -1,4 +1,4 @@
-struct Cacher<T>
+pub struct Cacher<T>
 where
     T: Fn(u128) -> u128
 {
@@ -11,7 +11,7 @@ impl<T> Cacher<T>
 where
     T: Fn(u128) -> u128
 {
-    pub fn new(&self, calculation: T) -> Cacher<T> {
+    pub fn new(calculation: T) -> Cacher<T> {
         Cacher {
             calculation,
             value: None
@@ -22,7 +22,9 @@ where
         match self.value {
             Some(v) => v,
             None => {
-                let v = self.calculation(value);
+                println!("Generating new result for {}", value);
+
+                let v = (self.calculation)(value);
                 self.value = Some(v);
                 v
             }
