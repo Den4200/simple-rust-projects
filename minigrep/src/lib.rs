@@ -10,28 +10,35 @@ pub struct Config {
 
 
 impl Config {
-    pub fn new(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("not enough arguments.");
-        }
+    pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {
+        args.next();
 
-        let query = args[1].clone();
-        let filename = args[2].clone();
+        let query = match args.next() {
+            Some(arg) => arg,
+            None => return Err("Missing query argument")
+        };
+
+        let filename = match args.next() {
+            Some(arg) => arg,
+            None => return Err("Missing filename argument")
+        };
 
         let case_sensitive;
-
-        if args.len() >= 4 {
-            case_sensitive = match args[3].as_str() {
-                "true" => true,
-                "false" => false,
-                _ => return Err("Incorrect argument for case sensitive parameter.")
+        match args.next() {
+            Some(arg) => {
+                case_sensitive = match arg.as_str() {
+                    "true" => true,
+                    "false" => false,
+                    _ => return Err("Incorrect argument for case sensitive parameter.")
+                }
             }
-        } else {
-            case_sensitive = match env::var("CASE_INSENSITIVE") {
-                Ok(value) => if value == "1" { false } else { true },
-                Err(_) => false
-            };
-        }        
+            None => {
+                case_sensitive = match env::var("CASE_INSENSITIVE") {
+                    Ok(value) => if value == "1" { false } else { true },
+                    Err(_) => false
+                };
+            }
+        }    
 
         Ok(Config { query, filename, case_sensitive })
     }    
