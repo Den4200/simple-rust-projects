@@ -89,27 +89,6 @@ mod tests {
 
     use super::*;
 
-    #[test]
-    fn test_new_config() {
-        let query = String::from("regex");
-        let filename = String::from("file.txt");
-
-        let config = Config::new(&[String::from("path/to/file"), query.clone(), filename.clone()])
-            .unwrap();
-
-        assert_eq!(query, config.query);
-        assert_eq!(filename, config.filename);
-    }
-
-    #[test]
-    fn test_run() {
-        let config = Config::new(&[String::from("path/to/file"), String::from("file.txt"), String::from("regex")])
-            .unwrap();
-
-        if let Ok(_) = run(config) {
-            panic!("Expected error. Should have failed to read file.");
-        }
-    }
 
     #[test]
     fn test_search_case_sensitive() {
