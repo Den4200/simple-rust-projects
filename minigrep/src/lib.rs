@@ -1,7 +1,14 @@
+//! minigrep
+//! 
+//! `minigrep` is a simple version of `grep`,
+//! a text filtering tool.
+
 use std::{env, fs};
 use std::error::Error;
 
 
+/// The `Config` struct holds the configuation
+/// used by the `run` function.
 pub struct Config {
     pub query: String,
     pub filename: String,
@@ -10,6 +17,8 @@ pub struct Config {
 
 
 impl Config {
+
+    /// A constructor for the `Config` struct which accepts the given command line arguments.
     pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {
         args.next();
 
@@ -45,6 +54,8 @@ impl Config {
 }
 
 
+/// Returns the filtered contents.
+/// *Note: This is a case sensitive search.*
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     contents
         .lines()
@@ -53,6 +64,8 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
 }
 
 
+/// Returns the filtered contents.
+/// *Note: This is a case insensitive search.*
 pub fn search_case_insensitive<'a>(
     query: &str,
     contents: &'a str
@@ -66,6 +79,7 @@ pub fn search_case_insensitive<'a>(
 }
 
 
+/// The main entrypoint, which accepts a `Config`.
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.filename)?;
 
